@@ -226,7 +226,7 @@ if "current_episode" not in st.session_state:
 # Sidebar Controls & Configuration
 with st.sidebar:
     st.title("🍸 Where Was AI?")
-    st.caption("A very New York spoiler-free companion")
+    st.caption("A very New York spoiler-free companion, darling")
 
     st.markdown("---")
     st.markdown("### 📺 Watch Progress")
@@ -306,7 +306,8 @@ st.markdown('<div class="main-header">🍸 Where Was AI?</div>', unsafe_allow_ht
 st.markdown(
     '<div class="sub-header">Your spoiler-free <i>Sex and the City</i> companion. '
     'A little archive of characters, relationships, and Manhattan misadventures — '
-    'with absolutely no spoilers past your current episode.</div>',
+    'with absolutely no spoilers past your current episode. Because knowledge is power, '
+    'but spoilers are a friendship-ending offense.</div>',
     unsafe_allow_html=True,
 )
 
@@ -323,7 +324,7 @@ for message in st.session_state.messages:
 
 # Check for pending prompt from quick buttons or chat input
 pending_prompt = st.session_state.pop("pending_prompt", None)
-user_prompt = st.chat_input("Ask a question about the show...")
+user_prompt = st.chat_input("Ask the archive a question, darling...")
 
 prompt_to_process = pending_prompt or user_prompt
 
@@ -342,7 +343,7 @@ if prompt_to_process:
 
         try:
             with status_placeholder.status(
-                f"Consulting archives (up to Episode {st.session_state.current_episode})...",
+                f"Let me consult the archives, darling (up to Episode {st.session_state.current_episode})...",
                 expanded=False,
             ) as status:
                 # Prepare conversation messages for the agent
@@ -371,21 +372,21 @@ if prompt_to_process:
 
                 if tool_logs:
                     unique_tools = list(dict.fromkeys(tool_logs))
-                    status.update(label=f"Done ({', '.join(unique_tools)})", state="complete", expanded=False)
+                    status.update(label=f"The archives have spoken ({', '.join(unique_tools)})", state="complete", expanded=False)
                 else:
-                    status.update(label="Response ready", state="complete", expanded=False)
+                    status.update(label="The gossip is ready", state="complete", expanded=False)
 
             # Finalize output display without the cursor
             if full_response:
                 response_placeholder.markdown(full_response)
                 st.session_state.messages.append({"role": "assistant", "content": full_response})
             else:
-                fallback_msg = "I was unable to generate a response. Please try rephrasing your question."
+                fallback_msg = "The archive is being dramatic. Try rephrasing your question."
                 response_placeholder.markdown(fallback_msg)
                 st.session_state.messages.append({"role": "assistant", "content": fallback_msg})
 
         except Exception as e:
             status_placeholder.empty()
-            error_message = f"⚠️ An error occurred while generating the response: {str(e)}"
+            error_message = f"⚠️ The archive is having a little Manhattan meltdown: {str(e)}"
             st.error(error_message)
             st.session_state.messages.append({"role": "assistant", "content": error_message})
