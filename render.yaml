@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: where-was-ai
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.address 0.0.0.0 --server.port $PORT --server.headless true --server.fileWatcherType none
+    envVars:
+      - key: AI_PROVIDER
+        value: nebius
+      - key: NEBIUS_BASE_URL
+        value: https://api.tokenfactory.nebius.com/v1/
+      - key: NEBIUS_MODEL
+        value: meta-llama/Llama-3.3-70B-Instruct
+      - key: NEBIUS_EMBEDDING_MODEL
+        value: Qwen/Qwen3-Embedding-8B
+      - key: EMBEDDING_PROVIDER
+        value: openai
+      - key: NEBIUS_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SUPABASE_DB_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
