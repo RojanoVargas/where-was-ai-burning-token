@@ -233,10 +233,18 @@ st.markdown(
         display: none !important;
     }
 
+    @keyframes archiveEmojiCycle {
+        0%, 24% { content: "🗽"; }
+        25%, 49% { content: "👠"; }
+        50%, 74% { content: "💄"; }
+        75%, 100% { content: "🍸"; }
+    }
+
     [data-testid="stStatusWidgetRunningIcon"]::before {
-        content: "🗽 👠 💄";
+        content: "🗽";
         font-size: 1.25rem;
         line-height: 1;
+        animation: archiveEmojiCycle 2.4s steps(1, end) infinite;
     }
     </style>
     """,
