@@ -389,6 +389,11 @@ if prompt_to_process:
                 if event_type == "token":
                     full_response += data
                     response_placeholder.markdown(full_response + "▌")
+                elif event_type == "status":
+                    status_placeholder.markdown(
+                        f'<div class="archive-status">{data}</div>',
+                        unsafe_allow_html=True,
+                    )
                 elif event_type == "tool_start":
                     tool_name, tool_input = data
                     readable_name = tool_name.replace("_", " ").title()

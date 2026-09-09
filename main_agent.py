@@ -84,7 +84,9 @@ def get_response_stream(messages, current_episode_id: int = None):
     # episode context once, then ask Nebius to write the answer without another
     # tool round. This also makes the RAG evidence easy to demonstrate.
     if AI_PROVIDER == "nebius" and is_plot_question:
+        yield "status", "🔍 Searching the episode archive..."
         retrieved = search_episodes.invoke({"query": latest_prompt, "k": 3})
+        yield "status", "🧠 Writing Carrie’s response..."
         response = main_llm.invoke(
             [
                 {
@@ -109,6 +111,7 @@ def get_response_stream(messages, current_episode_id: int = None):
     # Invoke the agent normally for Nebius, then yield the completed answer so
     # the Streamlit UI keeps its existing response interface.
     if AI_PROVIDER == "nebius":
+        yield "status", "🗄️ Consulting the archive database..."
         result = active_agent.invoke(
             {"messages": messages},
             # Allow enough room for a tool call plus its follow-up answer.
@@ -121,6 +124,7 @@ def get_response_stream(messages, current_episode_id: int = None):
                 part.get("text", "") if isinstance(part, dict) else str(part)
                 for part in content
             )
+        yield "status", "🧠 Writing Carrie’s response..."
         yield "token", content
         return
 
