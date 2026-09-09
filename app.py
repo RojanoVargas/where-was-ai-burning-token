@@ -194,6 +194,13 @@ st.markdown(
         border-left: 3px solid var(--rose);
     }
 
+    .archive-status {
+        color: var(--rose-dark);
+        font-size: 0.88rem;
+        font-style: italic;
+        padding: 0.35rem 0;
+    }
+
     [data-testid="stChatInput"] {
         background: transparent;
         border: 1px solid rgba(157, 49, 87, 0.25);
@@ -351,39 +358,51 @@ if prompt_to_process:
         tool_logs = []
 
         try:
-            with status_placeholder.status(
-                f"Let me consult the archives, darling (up to Episode {st.session_state.current_episode})...",
-                expanded=False,
-            ) as status:
-                # Prepare conversation messages for the agent
-                conversation_payload = [
-                    {"role": msg["role"], "content": msg["content"]}
-                    for msg in st.session_state.messages
-                ]
+            status_placeholder.markdown(
+                f'<div class="archive-status">🍸 Let me consult the archives, darling '
+                f'(up to Episode {st.session_state.current_episode})...</div>',
+                unsafe_allow_html=True,
+            )
 
-                # Stream response events with selected episode checkpoint
-                for event_type, data in get_response_stream(
-                    conversation_payload,
-                    current_episode_id=st.session_state.current_episode,
-                ):
-                    if event_type == "token":
-                        full_response += data
-                        response_placeholder.markdown(full_response + "▌")
-                    elif event_type == "tool_start":
-                        tool_name, tool_input = data
-                        readable_name = tool_name.replace("_", " ").title()
-                        status.write(f"🔍 Executing `{readable_name}`")
-                        tool_logs.append(readable_name)
-                    elif event_type == "tool_delta":
-                        pass
-                    elif event_type == "tool_end":
-                        pass
+            # Prepare conversation messages for the agent
+            conversation_payload = [
+                {"role": msg["role"], "content": msg["content"]}
+                for msg in st.session_state.messages
+            ]
 
-                if tool_logs:
-                    unique_tools = list(dict.fromkeys(tool_logs))
-                    status.update(label=f"The archives have spoken ({', '.join(unique_tools)})", state="complete", expanded=False)
-                else:
-                    status.update(label="The gossip is ready", state="complete", expanded=False)
+            # Stream response events with selected episode checkpoint
+            for event_type, data in get_response_stream(
+                conversation_payload,
+                current_episode_id=st.session_state.current_episode,
+            ):
+                if event_type == "token":
+                    full_response += data
+                    response_placeholder.markdown(full_response + "▌")
+                elif event_type == "tool_start":
+                    tool_name, tool_input = data
+                    readable_name = tool_name.replace("_", " ").title()
+                    status_placeholder.markdown(
+                        f'<div class="archive-status">🔍 Consulting {readable_name}...</div>',
+                        unsafe_allow_html=True,
+                    )
+                    tool_logs.append(readable_name)
+                elif event_type == "tool_delta":
+                    pass
+                elif event_type == "tool_end":
+                    pass
+
+            if tool_logs:
+                unique_tools = list(dict.fromkeys(tool_logs))
+                status_placeholder.markdown(
+                    f'<div class="archive-status">✨ The archives have spoken '
+                    f'({", ".join(unique_tools)})</div>',
+                    unsafe_allow_html=True,
+                )
+            else:
+                status_placeholder.markdown(
+                    '<div class="archive-status">✨ The gossip is ready</div>',
+                    unsafe_allow_html=True,
+                )
 
             # Finalize output display without the cursor
             if full_response:
