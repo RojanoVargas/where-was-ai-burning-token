@@ -258,6 +258,9 @@ if "messages" not in st.session_state:
 if "current_episode" not in st.session_state:
     st.session_state.current_episode = CURRENT_EPISODE_ID
 
+if "episode_selector" not in st.session_state:
+    st.session_state.episode_selector = st.session_state.current_episode
+
 # Sidebar Controls & Configuration
 with st.sidebar:
     st.title("🍸 Where Was AI?")
@@ -271,14 +274,13 @@ with st.sidebar:
         "Select your current episode:",
         options=list(AVAILABLE_EPISODES.keys()),
         format_func=lambda ep: AVAILABLE_EPISODES[ep],
-        index=st.session_state.current_episode - 1,
+        key="episode_selector",
         help="Choose the episode you have watched up to. Future episodes are strictly blocked.",
     )
 
-    # If the episode changed, update session state
-    if selected_ep != st.session_state.current_episode:
-        st.session_state.current_episode = selected_ep
-        st.rerun()
+    # Streamlit reruns automatically when the radio value changes.
+    # Keep the application state synchronized with the widget value.
+    st.session_state.current_episode = selected_ep
 
     image_url, image_caption = EPISODE_IMAGES[st.session_state.current_episode]
     st.image(image_url, caption=image_caption, width="stretch")
