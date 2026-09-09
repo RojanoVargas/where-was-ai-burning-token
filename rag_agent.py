@@ -55,12 +55,12 @@ vector_store = SupabaseVectorStore(
 # vector_store.add_documents(splits)
 
 @tool(parse_docstring=True)
-def search_episodes(query: str, k: int = 3) -> str:
+def search_episodes(query: str, k: int = 2) -> str:
     """Search episode summaries by meaning and return relevant chunks.
 
     Args:
         query: Natural language question about what happens in an episode.
-        k: Number of chunks to retrieve (default 3).
+    k: Number of chunks to retrieve (default 2).
 
     Returns:
         Text with episode titles, IDs, and matching summary snippets.

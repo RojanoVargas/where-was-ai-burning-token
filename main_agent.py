@@ -85,7 +85,7 @@ def get_response_stream(messages, current_episode_id: int = None):
     # tool round. This also makes the RAG evidence easy to demonstrate.
     if AI_PROVIDER == "nebius" and is_plot_question:
         yield "status", "🔍 Searching the episode archive..."
-        retrieved = search_episodes.invoke({"query": latest_prompt, "k": 3})
+        retrieved = search_episodes.invoke({"query": latest_prompt, "k": 2})
         yield "status", "🧠 Writing Carrie’s response..."
         response = main_llm.invoke(
             [

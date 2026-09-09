@@ -238,6 +238,14 @@ st.markdown(
         font-size: 1.25rem;
         line-height: 1;
     }
+
+    [data-testid="stStatusWidgetRunningIcon"]::after {
+        content: "Loading...";
+        color: rgba(49, 51, 63, 0.6);
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-left: 0.3rem;
+    }
     </style>
     """,
     unsafe_allow_html=True,
