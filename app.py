@@ -205,6 +205,11 @@ st.markdown(
         background-color: transparent !important;
     }
 
+    [data-testid="stChatInput"] > div:focus-within {
+        border-color: rgb(255, 75, 75);
+        border-radius: 25px;
+    }
+
     [data-testid="stChatInput"] textarea { font-family: 'DM Sans', sans-serif; }
     h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--plum); }
 
