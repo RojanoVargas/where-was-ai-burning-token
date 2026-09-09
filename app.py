@@ -199,6 +199,7 @@ st.markdown(
         border: 1px solid rgba(157, 49, 87, 0.25);
         border-radius: 999px;
         box-shadow: 0 8px 28px rgba(74, 41, 66, 0.1);
+        border-radius: 25px;
     }
 
     [data-testid="stChatInput"] textarea { font-family: 'DM Sans', sans-serif; }
