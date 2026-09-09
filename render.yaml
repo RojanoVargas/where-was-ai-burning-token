@@ -10,7 +10,7 @@ services:
       - key: NEBIUS_BASE_URL
         value: https://api.tokenfactory.nebius.com/v1/
       - key: NEBIUS_MODEL
-        value: meta-llama/Meta-Llama-3.1-8B-Instruct-fast
+        value: Qwen/Qwen3-30B-A3B-Instruct-2507
       - key: NEBIUS_EMBEDDING_MODEL
         value: Qwen/Qwen3-Embedding-8B
       - key: EMBEDDING_PROVIDER

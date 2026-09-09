@@ -11,7 +11,7 @@ NEBIUS_BASE_URL = os.getenv(
     "NEBIUS_BASE_URL", "https://api.tokenfactory.nebius.com/v1/"
 )
 NEBIUS_MODEL = os.getenv(
-    "NEBIUS_MODEL", "meta-llama/Meta-Llama-3.1-8B-Instruct-fast"
+    "NEBIUS_MODEL", "Qwen/Qwen3-30B-A3B-Instruct-2507"
 )
 NEBIUS_EMBEDDING_MODEL = os.getenv(
     "NEBIUS_EMBEDDING_MODEL", "Qwen/Qwen3-Embedding-8B"
