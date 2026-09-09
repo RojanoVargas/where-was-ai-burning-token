@@ -111,7 +111,8 @@ def get_response_stream(messages, current_episode_id: int = None):
     if AI_PROVIDER == "nebius":
         result = active_agent.invoke(
             {"messages": messages},
-            config={"recursion_limit": 8},
+            # Allow enough room for a tool call plus its follow-up answer.
+            config={"recursion_limit": 16},
         )
         final_message = result["messages"][-1]
         content = final_message.content

@@ -227,6 +227,17 @@ st.markdown(
     [aria-label="View fullscreen"] {
         display: none !important;
     }
+
+    /* Replace Streamlit's running-man execution icon with a cocktail. */
+    [data-testid="stStatusWidgetRunningIcon"] svg {
+        display: none !important;
+    }
+
+    [data-testid="stStatusWidgetRunningIcon"]::before {
+        content: "🍸";
+        font-size: 1.25rem;
+        line-height: 1;
+    }
     </style>
     """,
     unsafe_allow_html=True,
