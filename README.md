@@ -1,6 +1,7 @@
-# Where Was AI?
+# Where Was (A)I?
 
 A spoiler-free chatbot to help you refresh your point in a series.
+[Live version](https://where-was-ai-burning-token.onrender.com/)
 
 ## Run locally
 
