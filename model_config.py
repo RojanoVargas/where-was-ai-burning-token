@@ -36,7 +36,7 @@ def chat_model_kwargs() -> dict:
 
 def embedding_model_kwargs() -> dict:
     """Return LangChain OpenAIEmbeddings settings for the selected provider."""
-    if os.getenv("EMBEDDING_PROVIDER", "openai").lower() == "nebius":
+    if os.getenv("EMBEDDING_PROVIDER", "nebius").lower() == "nebius" or os.getenv("NEBIUS_API_KEY"):
         return {
             "model": NEBIUS_EMBEDDING_MODEL,
             "api_key": os.getenv("NEBIUS_API_KEY"),
