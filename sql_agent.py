@@ -13,9 +13,15 @@ sql_llm = ChatOpenAI(
     temperature=0,
 )
 
-db = SQLDatabase.from_uri(
-    os.getenv("SUPABASE_DB_URL")
-)
+def _get_clean_db_uri() -> str:
+    uri = os.getenv("SUPABASE_DB_URL", "")
+    if "pooler.supabase.com" in uri:
+        uri = uri.replace(":5432/", ":6543/")
+        if "&options=" in uri:
+            uri = uri.split("&options=")[0]
+    return uri
+
+db = SQLDatabase.from_uri(_get_clean_db_uri())
 
 @tool
 def sql_db_list_tables() -> str:
