@@ -42,6 +42,7 @@ def embedding_model_kwargs() -> dict:
             "api_key": os.getenv("NEBIUS_API_KEY"),
             "base_url": NEBIUS_BASE_URL,
             "tiktoken_enabled": False,
+            "check_embedding_ctx_length": False,
         }
 
     return {

@@ -14,7 +14,7 @@ services:
       - key: NEBIUS_EMBEDDING_MODEL
         value: Qwen/Qwen3-Embedding-8B
       - key: EMBEDDING_PROVIDER
-        value: openai
+        value: nebius
       - key: NEBIUS_API_KEY
         sync: false
       - key: OPENAI_API_KEY

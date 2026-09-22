@@ -12,7 +12,7 @@ python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-The app uses Nebius Token Factory for AI responses. Its OpenAI-compatible endpoint is configured with `NEBIUS_BASE_URL`, `NEBIUS_MODEL`, and `NEBIUS_API_KEY`. The existing Supabase vector index uses OpenAI embeddings because its stored vectors are 1,536-dimensional; `EMBEDDING_PROVIDER=openai` keeps retrieval compatible with that index.
+The app uses Nebius Token Factory for both AI responses and vector embeddings. Its OpenAI-compatible endpoint is configured with `NEBIUS_BASE_URL`, `NEBIUS_MODEL`, `NEBIUS_EMBEDDING_MODEL`, and `NEBIUS_API_KEY`. Embedding generation is handled with `EMBEDDING_PROVIDER=nebius` using 4,096-dimensional embeddings in Supabase.
 
 ## Evaluation
 

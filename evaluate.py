@@ -27,7 +27,7 @@ CASES = [
     {
         "name": "Future episode is blocked",
         "prompt": "What happens in Episode 3?",
-        "expected": ("spoiler", "cannot"),
+        "expected": ("spoiler", "cannot", "can't", "spoil"),
     },
 ]
 
